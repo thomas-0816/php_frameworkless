@@ -28,6 +28,8 @@
         <PropertyNotSetInConstructor errorLevel="suppress" />
         <RiskyTruthyFalsyComparison errorLevel="suppress" />
         <ClassMustBeFinal errorLevel="suppress" />
+        <PossiblyUnusedReturnValue errorLevel="suppress" />
+        <PossiblyUnusedMethod errorLevel="suppress" />
 
         <UnusedClass errorLevel="info">
         </UnusedClass>

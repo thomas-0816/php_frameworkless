@@ -50,10 +50,11 @@ class Authentication
         $data = $this->urlBase64Encode($header) . '.' . $this->urlBase64Encode($payload);
 
         $signature = '';
-        if (!openssl_sign($data, $signature, $privateKey, OPENSSL_ALGO_SHA512) || !is_string($signature)) {
+        if (!openssl_sign($data, $signature, $privateKey, OPENSSL_ALGO_SHA512)) {
             throw new Exception('signing failed');
         }
 
+        /** @var string $signature */
         return 'Bearer ' . $data . '.' . $this->urlBase64Encode($signature);
     }
 
