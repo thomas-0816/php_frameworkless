@@ -32,11 +32,11 @@ class App
     /** @var mixed[] */
     protected array $input;
 
-    private ?PDO $database;
+    private ?PDO $database = null;
 
-    private ?PDO $clickhouse;
+    private ?PDO $clickhouse = null;
 
-    private ?Redis $redis;
+    private ?Redis $redis = null;
 
     /**
      * @param mixed[] $get

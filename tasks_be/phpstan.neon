@@ -16,6 +16,7 @@ parameters:
     # PDO::ERRMODE_EXCEPTION is used by default
     - message: '#Cannot call method \w+\(\) on PDOStatement\|false.#'
       path: ./
+    - identifier: phpDoc.parseError
   checkFunctionNameCase: true
   checkInternalClassCaseSensitivity: true
   checkTooWideReturnTypesInProtectedAndPublicMethods: true

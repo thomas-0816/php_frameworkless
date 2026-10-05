@@ -105,7 +105,10 @@ class TasksRepository
         $query = sprintf('SELECT id, title, duedate, completed, last_updated_by FROM task WHERE id IN (%s)', $ids);
         $statement = $database->query($query);
 
-        return $this->getTasksFromRows($statement->fetchAll(PDO::FETCH_ASSOC));
+        /** @var mixed[][] */
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->getTasksFromRows($rows);
     }
 
     /**
@@ -145,7 +148,10 @@ class TasksRepository
         $statement = $database->prepare($query);
         $statement->execute([$customer->id, date('Y-m-d', strtotime('+1 week'))]);
 
-        return $this->getTasksFromRows($statement->fetchAll(PDO::FETCH_ASSOC));
+        /** @var mixed[][] */
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->getTasksFromRows($rows);
     }
 
     /**
@@ -164,7 +170,10 @@ class TasksRepository
         $statement = $database->prepare($query);
         $statement->execute([$customer->id]);
 
-        return $this->getTasksFromRows($statement->fetchAll(PDO::FETCH_ASSOC));
+        /** @var mixed[][] */
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $this->getTasksFromRows($rows);
     }
 
     /**

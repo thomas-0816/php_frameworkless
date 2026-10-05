@@ -19,22 +19,17 @@
 >
     <projectFiles>
         <directory name="src/" />
-        <directory name="tests/" />
         <ignoreFiles>
             <directory name="src/vendor" />
-            <directory name="tests/vendor" />
-            <file name="tests/unit/Framework/AppMock.php" /><!-- https://github.com/vimeo/psalm/issues/10152 -->
         </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
         <PropertyNotSetInConstructor errorLevel="suppress" />
         <RiskyTruthyFalsyComparison errorLevel="suppress" />
+        <ClassMustBeFinal errorLevel="suppress" />
 
         <UnusedClass errorLevel="info">
-            <errorLevel type="suppress">
-                <directory name="tests/" />
-            </errorLevel>
         </UnusedClass>
     </issueHandlers>
 

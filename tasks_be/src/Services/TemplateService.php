@@ -14,6 +14,7 @@ class TemplateService
 
     public function render(View $view): string
     {
+        /** @var string $template */
         $template = $view::TEMPLATE;
 
         if ($template === '') {
