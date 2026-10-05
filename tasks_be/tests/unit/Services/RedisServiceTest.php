@@ -14,6 +14,7 @@ final class RedisServiceTest extends TestCase
 {
     private AppMock $appMock;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

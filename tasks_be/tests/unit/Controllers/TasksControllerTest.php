@@ -18,6 +18,7 @@ final class TasksControllerTest extends TestCase
 
     private Customer $customer;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

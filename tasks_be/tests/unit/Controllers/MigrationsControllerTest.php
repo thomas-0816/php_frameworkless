@@ -12,6 +12,7 @@ final class MigrationsControllerTest extends TestCase
 {
     private AppMock $appMock;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

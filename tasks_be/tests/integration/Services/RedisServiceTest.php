@@ -14,6 +14,7 @@ final class RedisServiceTest extends TestCase
 {
     private App $app;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');

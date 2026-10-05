@@ -15,6 +15,7 @@ final class TaskProcessingServiceTest extends TestCase
 {
     private AppMock $appMock;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

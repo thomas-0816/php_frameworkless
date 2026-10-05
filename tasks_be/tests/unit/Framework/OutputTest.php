@@ -10,6 +10,7 @@ use TaskService\Framework\OutputMocks;
 
 final class OutputTest extends TestCase
 {
+    #[\Override]
     protected function setUp(): void
     {
         OutputMocks::$header = [];

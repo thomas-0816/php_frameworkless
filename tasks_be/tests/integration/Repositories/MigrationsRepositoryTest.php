@@ -14,6 +14,7 @@ final class MigrationsRepositoryTest extends TestCase
 {
     private App $app;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -22,6 +23,7 @@ final class MigrationsRepositoryTest extends TestCase
         file_put_contents('/tmp/clickhouse.sql', "INSERT INTO migration VALUES ('foo.sql', now());");
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $database = $this->app->getDatabase();

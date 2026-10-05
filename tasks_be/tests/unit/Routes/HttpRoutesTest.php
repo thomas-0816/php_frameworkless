@@ -17,6 +17,7 @@ final class HttpRoutesTest extends TestCase
 {
     private Customer $customer;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->customer = new Customer(42, '');

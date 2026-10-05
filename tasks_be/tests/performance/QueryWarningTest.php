@@ -18,6 +18,7 @@ final class QueryWarningTest extends TestCase
     private string $testDatabase;
 
     /** @SuppressWarnings(PHPMD.Superglobals) */
+    #[\Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -31,6 +32,7 @@ final class QueryWarningTest extends TestCase
         $database->query('USE ' . $this->testDatabase);
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->app->getDatabase()->query('DROP DATABASE ' . $this->testDatabase);

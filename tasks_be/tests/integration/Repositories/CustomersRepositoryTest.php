@@ -12,6 +12,7 @@ final class CustomersRepositoryTest extends TestCase
 {
     private App $app;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -19,6 +20,7 @@ final class CustomersRepositoryTest extends TestCase
         $this->app->getDatabase()->beginTransaction();
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->app->getDatabase()->rollBack();

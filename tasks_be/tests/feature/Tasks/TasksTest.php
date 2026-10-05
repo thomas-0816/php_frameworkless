@@ -18,6 +18,7 @@ final class TasksTest extends TestCase
 {
     private string $authorization;
 
+    #[\Override]
     protected function setUp(): void
     {
         $config = new Config();

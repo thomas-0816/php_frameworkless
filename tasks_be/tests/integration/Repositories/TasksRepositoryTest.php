@@ -21,6 +21,7 @@ final class TasksRepositoryTest extends TestCase
 
     private Task $task;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -33,6 +34,7 @@ final class TasksRepositoryTest extends TestCase
         $this->task = new Task(0, 'test', '2020-05-22', false, 'foo@invalid.local');
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         $this->app->getDatabase()->rollBack();

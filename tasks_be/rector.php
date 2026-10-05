@@ -16,7 +16,7 @@ return RectorConfig::configure()
         __DIR__ . '/src',
         __DIR__ . '/tests',
     ])
-    ->withPhpSets(php83: true)
+    ->withPhpSets(php85: true)
     ->withPhpVersion(PhpVersion::PHP_83)
     ->withAttributesSets(phpunit: true)
     ->withRootFiles()
