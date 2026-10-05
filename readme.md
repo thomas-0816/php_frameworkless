@@ -1,8 +1,6 @@
 PHP Frameworkless Micro Service Example
 ----------------------------------------
 
-[![Actions Build Status](https://github.com/thomasbley/example_tasks_php/workflows/build/badge.svg?branch=master)](https://github.com/thomasbley/example_tasks_php/actions)
-
 Example micro service to provide a REST API to manage customer tasks.
 
 The backend is written in PHP without a standard framework, stores data in MySQL/MariaDB,
@@ -13,7 +11,7 @@ The frontend is written as an SPA in Typed JavaScript using ES Modules and Alpin
 #### Setup
 
     # clone repository
-    git clone --depth=1 git@github.com:thbley/php_frameworkless.git
+    git clone --depth=1 git@github.com:thomas-0816/php_frameworkless.git
     cd php_frameworkless
 
     # build container
