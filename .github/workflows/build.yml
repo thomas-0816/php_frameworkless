@@ -148,6 +148,8 @@ jobs:
     - name: Build containers
       run: docker compose -f docker-compose-tasks-be.yml -f docker-compose-tasks-fe.yml build --pull --parallel
     - name: Run trivy vulnerability
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         URL=$(gh api '/repos/aquasecurity/trivy/releases?per_page=1' | \
           jq -r '.[].assets[].browser_download_url | select(endswith("Linux-64bit.tar.gz"))')
@@ -156,9 +158,9 @@ jobs:
         /tmp/trivy fs --no-progress --scanners vuln,misconfig,secret --exit-code 1 ./
         docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|playwright|html|mailpit" | \
           xargs -n1 /tmp/trivy image --scanners vuln --exit-code 1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: Run docker scout vulnerability scanner
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         URL=$(gh api '/repos/docker/scout-cli/releases?per_page=1' | \
           jq -r '.[].assets[].browser_download_url | select(endswith("linux_amd64.tar.gz"))')
@@ -169,8 +171,6 @@ jobs:
         docker scout cves -e --locations fs://.
         docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|playwright|html|mailpit" | \
           xargs -n1 docker scout cves --locations 2>/dev/null | grep -Eiv "What|recommend"
-      env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: Run sslscan, test tls, self-signed certificate
       run: |
         docker compose up nginx -d &

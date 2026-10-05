@@ -1,4 +1,4 @@
-FROM mariadb:12-resolute
+FROM mariadb:13-resolute
 
 RUN apt-get -y update \
     && apt-get upgrade -y \
