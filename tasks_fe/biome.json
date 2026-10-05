@@ -1,38 +1,41 @@
 {
     "$schema": "./tests/node_modules/@biomejs/biome/configuration_schema.json",
     "files": {
-        "include": ["**/*.js", "**/*.html", "**/*.css"],
-        "ignore": ["**/dist/**", "**/playwright-report/**"]
+        "includes": [
+            "**/*.js",
+            "**/*.html",
+            "**/*.css",
+            "!**/dist/**",
+            "!**/playwright-report/**",
+            "!**/lh_*.html"
+        ]
     },
-    "organizeImports": {
-        "enabled": false
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "off"
+            }
+        }
     },
     "linter": {
         "enabled": true,
         "rules": {
-            "all": true,
-            "nursery": {
-                "all": true,
-                "useImportRestrictions": "off",
-                "noUndeclaredDependencies": "off",
-                "useTopLevelRegex": "off"
-            },
+            "preset": "all",
             "suspicious": {
-                "all": true,
                 "noEmptyBlockStatements": "off"
             },
             "correctness": {
-                "all": true,
+                "noUndeclaredDependencies": "off",
                 "noNodejsModules": "off"
             }
         }
     },
     "overrides": [
         {
-            "include": ["tests/**"],
+            "includes": ["tests/**"],
             "linter": {
                 "rules": {
-                    "nursery": {
+                    "suspicious": {
                         "noConsole": "off"
                     },
                     "style": {
