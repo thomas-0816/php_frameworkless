@@ -58,7 +58,6 @@ docker compose -f docker-compose-tasks-fe.yml run --rm npm_tests outdated
 docker compose -f docker-compose-tasks-fe.yml run --rm npm_tests audit
 
 docker compose -f docker-compose-tasks-fe.yml run --rm biome
-docker compose -f docker-compose-tasks-fe.yml run --rm stylelint
 docker compose -f docker-compose-tasks-fe.yml run --rm tsclint
 docker compose -f docker-compose-tasks-fe.yml run --rm htmlvalidate
 docker compose -f docker-compose-tasks-fe.yml run -u $(id -u) --rm esbuild

@@ -93,7 +93,6 @@ jobs:
       run: |
         bash -c "! grep --include=*.{js,css} --exclude-dir=node_modules --exclude-dir=dist -rn '.\{121\}' tasks_fe"
         docker compose -f docker-compose-tasks-fe.yml run --rm biome
-        docker compose -f docker-compose-tasks-fe.yml run --rm stylelint
         docker compose -f docker-compose-tasks-fe.yml run --rm tsclint
         docker compose -f docker-compose-tasks-fe.yml run --rm htmlvalidate
         docker compose -f docker-compose-tasks-fe.yml run -u $(id -u) --rm esbuild

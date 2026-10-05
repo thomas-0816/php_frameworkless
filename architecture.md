@@ -99,7 +99,7 @@ PHP Frameworkless Micro Service Example
     run phpunit tests
     download npm packages
     check package-json.lock for outdated packages and vulnerabilities
-    run biome, stylelint, tsc (linting), esbuild
+    run biome, tsc (linting), esbuild
     run vitest, playwright, lighthouse
     collect statistics
     run pipeline locally: .github/workflows/php_local.sh

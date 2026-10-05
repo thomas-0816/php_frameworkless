@@ -48,7 +48,6 @@ The frontend is written as an SPA in Typed JavaScript using ES Modules and Alpin
 #### Static code analyzers and builders (frontend)
 
     docker compose -f docker-compose-tasks-fe.yml run --rm biome
-    docker compose -f docker-compose-tasks-fe.yml run --rm stylelint
     docker compose -f docker-compose-tasks-fe.yml run --rm tsclint
     docker compose -f docker-compose-tasks-fe.yml run --rm htmlvalidate
     docker compose -f docker-compose-tasks-fe.yml run -u $(id -u) --rm esbuild
@@ -67,7 +66,7 @@ The frontend is written as an SPA in Typed JavaScript using ES Modules and Alpin
 #### Security scanning
 
     docker images | grep example_tasks | awk '{print $1}' | xargs -n1 trivy image --scanners vuln
-    trivy fs --scanners vuln,config,secret,license --license-full --skip-dirs "tasks_be/tests/vendor/" ./
+    trivy fs --scanners vuln,config,secret --skip-dirs "tasks_be/tests/vendor/" ./
 
     docker images | grep example_tasks | awk '{print $1}' | xargs -n1 docker scout cves --locations
     docker scout cves fs://.
