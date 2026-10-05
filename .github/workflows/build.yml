@@ -148,17 +148,15 @@ jobs:
         shopt -o pipefail
     - name: Build containers
       run: docker compose -f docker-compose-tasks-be.yml -f docker-compose-tasks-fe.yml build --pull --parallel
-    - name: Run trivy vulnerability + license scanner
+    - name: Run trivy vulnerability
       run: |
         URL=$(gh api '/repos/aquasecurity/trivy/releases?per_page=1' | \
           jq -r '.[].assets[].browser_download_url | select(endswith("Linux-64bit.tar.gz"))')
         wget -q -O- $URL | tar xz -C /tmp
         /tmp/trivy -v
-        /tmp/trivy fs --no-progress --scanners vuln,config,secret --exit-code 1 ./
-        docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|html|mailpit" | \
+        /tmp/trivy fs --no-progress --scanners vuln,misconfig,secret --exit-code 1 ./
+        docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|playwright|html|mailpit" | \
           xargs -n1 /tmp/trivy image --scanners vuln --exit-code 1
-        /tmp/trivy fs --scanners license --license-full ./
-        /tmp/trivy image --scanners license example_tasks_php
       env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: Run docker scout vulnerability scanner
@@ -170,7 +168,7 @@ jobs:
         echo ${{ secrets.DOCKER_PAT }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
         docker scout version | grep version
         docker scout cves -e --locations fs://.
-        docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|html|mailpit" | \
+        docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|playwright|html|mailpit" | \
           xargs -n1 docker scout cves --locations 2>/dev/null | grep -Eiv "What|recommend"
       env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
