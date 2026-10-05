@@ -9,37 +9,34 @@ const browser = await puppeteer.launch({
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
     acceptInsecureCerts: true,
 });
+const context = browser.defaultBrowserContext();
 const tasksUrl = 'https://nginx/tasks/';
 const loginUrl = 'http://nginx:8080/v1/customers/login';
 
-await (async () => {
-    const page = await browser.newPage();
-    page.setCookie({ domain: 'nginx', name: 'token', value: '' });
+// lighthouse must run on a fresh page, reusing a page yields a broken trace
+// (missing network requests) and makes the trace engine throw
 
-    const desktop = await lightHouse(page, tasksUrl, './lh_login_desktop.html', false);
-    const mobile = await lightHouse(page, tasksUrl, './lh_login_mobile.html', true);
+await (async () => {
+    await context.setCookie({ domain: 'nginx', name: 'token', value: '' });
+
+    const desktop = await lightHouse(await context.newPage(), tasksUrl, './lh_login_desktop.html', false);
+    const mobile = await lightHouse(await context.newPage(), tasksUrl, './lh_login_mobile.html', true);
 
     console.info('Login (desktop, mobile)');
     console.info(formatOutput(desktop, mobile).join('\n'), '\n');
-
-    page.close();
 })();
 
 await (async () => {
     const body = JSON.stringify({ email: 'foo@bar.baz', password: 'insecure' });
     const login = await fetch(loginUrl, { method: 'POST', body: body });
     const token = String((await login.json()).token);
+    await context.setCookie({ domain: 'nginx', name: 'token', value: token });
 
-    const page = await browser.newPage();
-    page.setCookie({ domain: 'nginx', name: 'token', value: token });
-
-    const desktop = await lightHouse(page, tasksUrl, './lh_list_desktop.html', false);
-    const mobile = await lightHouse(page, tasksUrl, './lh_list_mobile.html', true);
+    const desktop = await lightHouse(await context.newPage(), tasksUrl, './lh_list_desktop.html', false);
+    const mobile = await lightHouse(await context.newPage(), tasksUrl, './lh_list_mobile.html', true);
 
     console.info('Task List (desktop, mobile)');
     console.info(formatOutput(desktop, mobile).join('\n'), '\n');
-
-    page.close();
 })();
 
-browser.close();
+await browser.close();
