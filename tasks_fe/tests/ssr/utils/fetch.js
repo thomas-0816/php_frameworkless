@@ -57,7 +57,7 @@ export const fetch = (url) => {
     return new Promise((resolve) => {
         const headers = new Headers();
         headers.set('Content-Type', contentType);
-        const body = content !== '' ? content : null;
+        const body = content === '' ? null : content;
         const response = new Response(body, { status: status, statusText: '', headers: headers });
         resolve(response);
     });

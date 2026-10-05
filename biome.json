@@ -1,46 +1,66 @@
 {
     "$schema": "./tasks_fe/tests/node_modules/@biomejs/biome/configuration_schema.json",
     "files": {
-        "include": ["**/*.js", "**/*.html", "**/*.css", "**/*.json"],
-        "ignore": ["**/dist/**", "**/playwright-report/**"]
+        "includes": ["**/*.js", "**/*.html", "**/*.css", "!**/dist/**", "!**/playwright-report/**", "!**/lh_*.html"]
     },
-    "organizeImports": {
-        "enabled": false
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "off"
+            }
+        }
     },
     "linter": {
         "enabled": true,
         "rules": {
-            "all": true,
-            "nursery": {
-                "all": true,
-                "useImportRestrictions": "off",
-                "noUndeclaredDependencies": "off",
-                "useTopLevelRegex": "off"
+            "preset": "all",
+            "a11y": {
+                "noAutofocus": "off",
+                "useValidAnchor": "off"
             },
             "suspicious": {
-                "all": true,
-                "noEmptyBlockStatements": "off"
+                "noEmptyBlockStatements": "off",
+                "noForIn": "off",
+                "noDocumentCookie": "off"
             },
             "correctness": {
-                "all": true,
-                "noNodejsModules": "off"
+                "noNodejsModules": "off",
+                "noUndeclaredDependencies": "off",
+                "noUnresolvedImports": "off",
+                "useQwikValidLexicalScope": "off"
+            },
+            "style": {
+                "noTernary": "off",
+                "useDestructuring": "off",
+                "useConsistentObjectDefinitions": "off",
+                "noMagicNumbers": "off",
+                "useNumericSeparators": "off",
+                "noIncrementDecrement": "off",
+                "useGlobalThis": "off",
+                "noSubstr": "off"
+            },
+            "security": {
+                "noSecrets": "off"
             }
         }
     },
-    "overrides": [{
-        "include": ["tests/**"],
-        "linter": {
-            "rules": {
-                "nursery": {
-                    "noConsole": "off"
-                },
-                "style": {
-                    "noDefaultExport": "off",
-                    "useNamingConvention": "off"
+    "overrides": [
+        {
+            "includes": ["tests/**"],
+            "linter": {
+                "rules": {
+                    "suspicious": {
+                        "noConsole": "off"
+                    },
+                    "style": {
+                        "noDefaultExport": "off",
+                        "useNamingConvention": "off",
+                        "useConsistentObjectDefinitions": "off"
+                    }
                 }
             }
         }
-    }],
+    ],
     "formatter": {
         "enabled": true,
         "indentStyle": "space",

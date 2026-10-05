@@ -1,14 +1,7 @@
 {
     "$schema": "./tests/node_modules/@biomejs/biome/configuration_schema.json",
     "files": {
-        "includes": [
-            "**/*.js",
-            "**/*.html",
-            "**/*.css",
-            "!**/dist/**",
-            "!**/playwright-report/**",
-            "!**/lh_*.html"
-        ]
+        "includes": ["**/*.js", "**/*.html", "**/*.css", "!**/dist/**", "!**/playwright-report/**", "!**/lh_*.html"]
     },
     "assist": {
         "actions": {
@@ -21,12 +14,33 @@
         "enabled": true,
         "rules": {
             "preset": "all",
+            "a11y": {
+                "noAutofocus": "off",
+                "useValidAnchor": "off"
+            },
             "suspicious": {
-                "noEmptyBlockStatements": "off"
+                "noEmptyBlockStatements": "off",
+                "noForIn": "off",
+                "noDocumentCookie": "off"
             },
             "correctness": {
+                "noNodejsModules": "off",
                 "noUndeclaredDependencies": "off",
-                "noNodejsModules": "off"
+                "noUnresolvedImports": "off",
+                "useQwikValidLexicalScope": "off"
+            },
+            "style": {
+                "noTernary": "off",
+                "useDestructuring": "off",
+                "useConsistentObjectDefinitions": "off",
+                "noMagicNumbers": "off",
+                "useNumericSeparators": "off",
+                "noIncrementDecrement": "off",
+                "useGlobalThis": "off",
+                "noSubstr": "off"
+            },
+            "security": {
+                "noSecrets": "off"
             }
         }
     },
