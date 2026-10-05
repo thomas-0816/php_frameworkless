@@ -19,8 +19,8 @@ export async function render(html, script, url, cookie, fetch) {
     window.console.warn = () => {};
     window.document.cookie = `${cookie}; Max-Age=60; path=/; SameSite=Strict`;
     window.performance.memory = { totalJSHeapSize: 10485760 * 2, usedJSHeapSize: 10485760 };
-    window.setInterval = (/** @type {TimerHandler} */ handler) => {
-        setTimeout(() => handler(), 10);
+    /** @type {Window} */ (window).setInterval = (/** @type {() => void} */ handler) => {
+        setTimeout(handler, 10);
         return 0;
     };
 
