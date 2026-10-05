@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:edge
 
 RUN apk --no-cache upgrade \
     && apk --no-cache add chromium-swiftshader \

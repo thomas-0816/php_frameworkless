@@ -1,4 +1,4 @@
-FROM clickhouse/clickhouse-server:24-alpine
+FROM clickhouse/clickhouse-server:26.8-alpine
 
 RUN apk --no-cache upgrade
 

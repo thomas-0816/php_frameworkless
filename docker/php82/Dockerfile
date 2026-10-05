@@ -1,7 +1,9 @@
 FROM alpine:edge
 
 # use 1 run command to reduce container image layers
-RUN apk --no-cache upgrade \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
+    apk --no-cache upgrade \
     && apk --no-cache add php82-fpm php82-curl php82-pdo_mysql php82-pdo_pgsql php82-mbstring php82-opcache \
         php82-phar php82-tokenizer php82-dom php82-simplexml php82-xml php82-xmlwriter \
         php82-pecl-redis php82-pecl-pcov msmtp \

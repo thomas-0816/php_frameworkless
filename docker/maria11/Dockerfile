@@ -1,4 +1,4 @@
-FROM mariadb:11-jammy
+FROM mariadb:11-noble
 
 RUN apt-get -y update \
     && apt-get upgrade -y \
