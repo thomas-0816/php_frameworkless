@@ -1,6 +1,6 @@
 services:
   php:
-    build: ./docker/php83
+    build: ./docker/php85
     image: example_tasks_php
     cap_drop: [all]
     volumes:
@@ -41,7 +41,7 @@ services:
       start_period: 30s
       start_interval: 1s
   mysql:
-    build: ./docker/mysql80
+    build: ./docker/mysql84
     image: example_tasks_mysql
     cap_drop: [all]
     cap_add: [sys_nice]

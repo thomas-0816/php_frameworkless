@@ -18,7 +18,7 @@
     "workbench.tree.indent": 20,
     "workbench.startupEditor": "none",
     "workbench.editor.enablePreview": false,
-    "workbench.colorTheme": "Default Dark+",
+    "workbench.colorTheme": "Dark+",
     "workbench.colorCustomizations": {
         "editor.lineHighlightBackground": "#37373d"
     },

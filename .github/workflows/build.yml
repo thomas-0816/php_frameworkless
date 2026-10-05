@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ["php81", "php82", "php83", "phplatest"]
-        mysql-version: ["mysql80", "mysql82", "maria10", "maria11"]
+        php-version: ["php82", "php83", "php84", "php85", "php86"]
+        mysql-version: ["mysql84", "mysql97", "maria10", "maria11", "maria12", "maria13"]
 
     runs-on: ubuntu-latest
     steps:
@@ -27,8 +27,8 @@ jobs:
 
     - name: Build versions
       run: |
-        sed -i'.bak' 's/php82/${{ matrix.php-version }}/g' docker-compose.yml
-        sed -i'.bak' 's/mysql80/${{ matrix.mysql-version }}/g' docker-compose.yml
+        sed -i'.bak' 's/php85/${{ matrix.php-version }}/g' docker-compose.yml
+        sed -i'.bak' 's/mysql84/${{ matrix.mysql-version }}/g' docker-compose.yml
         sed -i'.bak' 's/tasks_fe\/src/tasks_fe\/dist/' docker-compose.yml
 
     - name: Build containers
