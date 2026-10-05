@@ -14,7 +14,7 @@ final class EmailTest extends TestCase
     {
         $subject = 'test ' . microtime(true);
 
-        $result = mail('recipient@invalid.local', $subject, 'some content', 'From: sender@invalid.local');
+        $result = mail('recipient@invalid.local', $subject, 'some content', ['From' => 'sender@invalid.local']);
         $this->assertTrue($result);
 
         $curlHandle = curl_init();

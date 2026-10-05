@@ -23,7 +23,7 @@ final class HasSlowQueryTest extends TestCase
         $query = '
             SELECT query_time, lock_time, rows_sent, rows_examined, convert(sql_text using utf8mb4) as query
             FROM mysql.slow_log
-            WHERE start_time > ?
+            WHERE start_time >= ?
             HAVING query not like "INSERT INTO%"
             AND query not like "CREATE%"
             AND query not like "SHOW%"

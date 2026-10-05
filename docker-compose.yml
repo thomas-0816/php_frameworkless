@@ -47,7 +47,7 @@ services:
     cap_add: [sys_nice]
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./docker/mysql80/mysql.conf:/etc/mysql/conf.d/mysql.cnf:ro
+      - ./docker/mysql84/mysql.conf:/etc/mysql/conf.d/mysql.cnf:ro
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: tasks
