@@ -19,8 +19,10 @@ export async function render(html, script, url, cookie, fetch) {
     window.console.warn = () => {};
     window.document.cookie = `${cookie}; Max-Age=60; path=/; SameSite=Strict`;
     window.performance.memory = { totalJSHeapSize: 10485760 * 2, usedJSHeapSize: 10485760 };
-    // @ts-ignore
-    window.setInterval = (handler) => setTimeout(() => handler(), 10);
+    window.setInterval = (/** @type {TimerHandler} */ handler) => {
+        setTimeout(() => handler(), 10);
+        return 0;
+    };
 
     // use system loader for code coverage, add timestamp to re-load module
     await import(new URL(`${script}?${Date.now()}`, import.meta.url).href);

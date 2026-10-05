@@ -1,7 +1,7 @@
 {
     "$schema": "./tests/node_modules/@biomejs/biome/configuration_schema.json",
     "files": {
-        "includes": ["**/*.js", "**/*.html", "**/*.css", "!**/dist/**", "!**/playwright-report/**", "!**/lh_*.html"]
+        "includes": ["**/*.js", "**/*.html", "**/*.css", "!**/dist/**", "!**/playwright-report/", "!**/lh_*.html"]
     },
     "assist": {
         "actions": {
@@ -13,53 +13,17 @@
     "linter": {
         "enabled": true,
         "rules": {
-            "preset": "all",
+            "preset": "recommended",
             "a11y": {
                 "noAutofocus": "off",
                 "useValidAnchor": "off"
             },
             "suspicious": {
-                "noEmptyBlockStatements": "off",
-                "noForIn": "off",
-                "noDocumentCookie": "off"
-            },
-            "correctness": {
-                "noNodejsModules": "off",
-                "noUndeclaredDependencies": "off",
-                "noUnresolvedImports": "off",
-                "useQwikValidLexicalScope": "off"
-            },
-            "style": {
-                "noTernary": "off",
-                "useDestructuring": "off",
-                "useConsistentObjectDefinitions": "off",
-                "noMagicNumbers": "off",
-                "useNumericSeparators": "off",
-                "noIncrementDecrement": "off",
-                "useGlobalThis": "off",
-                "noSubstr": "off"
-            },
-            "security": {
-                "noSecrets": "off"
+                "noDocumentCookie": "off",
+                "useBiomeIgnoreFolder": "off"
             }
         }
     },
-    "overrides": [
-        {
-            "includes": ["tests/**"],
-            "linter": {
-                "rules": {
-                    "suspicious": {
-                        "noConsole": "off"
-                    },
-                    "style": {
-                        "noDefaultExport": "off",
-                        "useNamingConvention": "off"
-                    }
-                }
-            }
-        }
-    ],
     "formatter": {
         "enabled": true,
         "indentStyle": "space",

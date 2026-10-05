@@ -9,6 +9,7 @@ PHP Frameworkless Micro Service Example
     docker volume prune -a
     docker container prune
     docker builder prune -a
+    docker buildx prune
     docker system prune -a
 
     # access/error logs
