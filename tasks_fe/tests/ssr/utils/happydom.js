@@ -1,13 +1,13 @@
 // @ts-check
 
-import { builtinEnvironments } from 'vitest/environments';
+import { builtinEnvironments } from 'vitest/runtime';
 
 /**
  * @param {string} html
  * @param {string} script
  * @param {string} url
  * @param {string} cookie
- * @param {function(URL | RequestInfo): Promise<Response>} fetch
+ * @param {(url: URL | RequestInfo, options?: RequestInit) => Promise<Response>} fetch
  * @returns {Promise<{teardown: function}>}
  */
 export async function render(html, script, url, cookie, fetch) {

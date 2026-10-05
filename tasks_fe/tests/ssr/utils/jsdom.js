@@ -1,13 +1,13 @@
 // @ts-check
 
-import { builtinEnvironments } from 'vitest/environments';
+import { builtinEnvironments } from 'vitest/runtime';
 
 /**
  * @param {string} html
  * @param {string} script
  * @param {string} url
  * @param {string} cookie
- * @param {function(URL | RequestInfo): Promise<Response>} fetch
+ * @param {(url: URL | RequestInfo, options?: RequestInit) => Promise<Response>} fetch
  * @returns {Promise<{teardown: function}>}
  */
 export async function render(html, script, url, cookie, fetch) {
@@ -23,7 +23,7 @@ export async function render(html, script, url, cookie, fetch) {
     window.setInterval = (handler) => setTimeout(() => handler(), 10);
 
     // use system loader for code coverage, add timestamp to re-load module
-    await import(`${script}?${Date.now()}`);
+    await import(new URL(`${script}?${Date.now()}`, import.meta.url).href);
 
     return {
         teardown: async () => {

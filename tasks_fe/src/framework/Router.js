@@ -16,7 +16,7 @@ export class Router {
 
     /**
      * @param {MouseEvent} event
-     * @param {{pushState: function({path: string}, string, string):void}} history
+     * @param {{pushState: (state: {path: string}, title: string, url: string) => void}} history
      */
     handleLinkClick(event, history) {
         if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.button) {

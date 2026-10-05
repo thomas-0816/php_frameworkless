@@ -17,7 +17,7 @@ import { Router } from './Router.js';
 export class App {
     /**
      * @param {{cookie: string, title: string, location: {protocol: string, pathname: string}}} document
-     * @param {function(string, RequestInit): Promise<Response>} fetch
+     * @param {(url: string, options: RequestInit) => Promise<Response>} fetch
      */
     constructor(document, fetch) {
         this.router = new Router(this);

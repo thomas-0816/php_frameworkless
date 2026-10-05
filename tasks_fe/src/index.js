@@ -4,6 +4,10 @@ import { App } from './framework/App.js';
 import Alpine from './node_modules/alpinejs/dist/module.esm.js';
 import { onCLS, onFCP, onFID, onINP, onLCP, onTTFB } from './node_modules/web-vitals/dist/web-vitals.attribution.js';
 
+/**
+ * @typedef {import('alpinejs').DirectiveUtilities} DirectiveUtilities
+ */
+
 export class Bootstrap {
     start() {
         document.addEventListener('alpine:init', () => this.init(), { once: true });
@@ -52,7 +56,7 @@ export class Bootstrap {
          *
          * @param {HTMLElement} element
          * @param {{expression: string}} params
-         * @param {{effect: function(function(): void): void, evaluate: function(string):string}} utils
+         * @param {DirectiveUtilities} utils
          */
         const setText = async (element, { expression }, { effect, evaluate }) => {
             effect(() => {
