@@ -15,7 +15,7 @@ The frontend is written as an SPA in Typed JavaScript using ES Modules and Alpin
     cd php_frameworkless
 
     # build container
-    docker compose -f docker-compose-tasks-be.yml -f docker-compose-tasks-fe.yml build --pull --no-cache --parallel
+    docker compose -f docker-compose-tasks-e2e.yml -f docker-compose-tasks-be.yml -f docker-compose-tasks-fe.yml build --pull --no-cache --parallel
 
     # setup composer
     mkdir -m 0777 tasks_be/src/vendor tasks_be/tests/vendor

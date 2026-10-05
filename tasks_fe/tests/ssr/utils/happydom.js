@@ -24,7 +24,7 @@ export async function render(html, script, url, cookie, fetch) {
     window.setInterval = (handler) => setTimeout(() => handler(), 10);
 
     // use system loader for code coverage, add timestamp to re-load module
-    await import(`${script}?${Date.now()}`);
+    await import(new URL(`${script}?${Date.now()}`, import.meta.url).href);
 
     return {
         teardown: async () => {
