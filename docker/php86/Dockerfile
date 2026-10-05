@@ -4,7 +4,7 @@ FROM alpine:edge
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     apk --no-cache upgrade \
-    && apk --no-cache add php86-fpm php86-curl php86-pdo_mysql php86-pdo_pgsql php86-mbstring \
+    && apk --no-cache add php86-fpm php86-curl php86-pdo_mysql php86-pdo_pgsql php86-mbstring php86-iconv \
         php86-phar php86-tokenizer php86-dom php86-simplexml php86-xml php86-xmlwriter \
         php86-pecl-redis php86-pecl-pcov msmtp \
     && rm /etc/php86/conf.d/pcov.ini \

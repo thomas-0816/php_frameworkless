@@ -2,7 +2,7 @@ FROM alpine:edge
 
 # use 1 run command to reduce container image layers
 RUN apk --no-cache upgrade \
-    && apk --no-cache add php84-fpm php84-curl php84-pdo_mysql php84-pdo_pgsql php84-mbstring php84-opcache \
+    && apk --no-cache add php84-fpm php84-curl php84-pdo_mysql php84-pdo_pgsql php84-mbstring php84-iconv php84-opcache \
         php84-phar php84-tokenizer php84-dom php84-simplexml php84-xml php84-xmlwriter \
         php84-pecl-redis php84-pecl-pcov msmtp \
     && rm /etc/php84/conf.d/pcov.ini \
