@@ -9,6 +9,20 @@ class MigrationsRepository
 {
     public function __construct(private App $app) {}
 
+    /**
+     * @return iterable<int, string>
+     */
+    public function processMigrationsMySql(string $path): iterable
+    {
+        foreach (scandir($path) ?: [] as $file) {
+            if (str_ends_with($file, '.sql') && !$this->isMySqlImported($file)) {
+                yield 'Processing mysql/' . $file;
+
+                $this->importMySql($path . $file);
+            }
+        }
+    }
+
     public function importMySql(string $file): void
     {
         if (!is_readable($file)) {
@@ -37,6 +51,20 @@ class MigrationsRepository
         $statement->execute([$filename]);
 
         return (bool) $statement->rowCount();
+    }
+
+    /**
+     * @return iterable<int, string>
+     */
+    public function processMigrationsClickHouse(string $path): iterable
+    {
+        foreach (scandir($path) ?: [] as $file) {
+            if (str_ends_with($file, '.sql') && !$this->isClickHouseImported($file)) {
+                yield 'Processing clickhouse/' . $file;
+
+                $this->importClickHouse($path . $file);
+            }
+        }
     }
 
     public function importClickHouse(string $file): void

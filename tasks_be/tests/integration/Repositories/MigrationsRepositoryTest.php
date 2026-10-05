@@ -22,19 +22,78 @@ final class MigrationsRepositoryTest extends TestCase
 
         file_put_contents('/tmp/migration.sql', "INSERT INTO migration VALUES ('foo.sql', now());");
         file_put_contents('/tmp/clickhouse.sql', "INSERT INTO migration VALUES ('foo.sql', now());");
+
+        mkdir('/tmp/migrations');
+        mkdir('/tmp/migrations_clickhouse');
     }
 
     #[Override]
     protected function tearDown(): void
     {
         $database = $this->app->getDatabase();
-        $database->query("DELETE FROM migration WHERE filename IN ('migration.sql', 'foo.sql')");
+        $database->query("DELETE FROM migration WHERE filename IN ('migration.sql', 'foo.sql', 'imported.sql')");
 
         $clickhouse = $this->app->getClickHouse();
-        $clickhouse->query("DELETE FROM migration WHERE filename IN ('clickhouse.sql', 'foo.sql')");
+        $clickhouse->query("DELETE FROM migration WHERE filename IN ('clickhouse.sql', 'foo.sql', 'imported.sql')");
 
         unlink('/tmp/migration.sql');
         unlink('/tmp/clickhouse.sql');
+
+        foreach (glob('/tmp/migrations/*') ?: [] as $file) {
+            unlink($file);
+        }
+
+        rmdir('/tmp/migrations');
+
+        foreach (glob('/tmp/migrations_clickhouse/*') ?: [] as $file) {
+            unlink($file);
+        }
+
+        rmdir('/tmp/migrations_clickhouse');
+    }
+
+    public function testProcessMigrationsMySql(): void
+    {
+        file_put_contents('/tmp/migrations/imported.sql', 'SELECT 1;');
+
+        $migrationsRepository = $this->app->getMigrationsRepository();
+        $actual = $migrationsRepository->processMigrationsMySql('/tmp/migrations/');
+
+        $this->assertSame(['Processing mysql/imported.sql'], [...$actual]);
+    }
+
+    public function testProcessMigrationsMySqlAllDone(): void
+    {
+        $migrationsRepository = $this->app->getMigrationsRepository();
+        $migrationsRepository->importMySql('/tmp/migration.sql');
+
+        copy('/tmp/migration.sql', '/tmp/migrations/migration.sql');
+
+        $actual = $migrationsRepository->processMigrationsMySql('/tmp/migrations/');
+
+        $this->assertSame([], [...$actual]);
+    }
+
+    public function testProcessMigrationsClickHouse(): void
+    {
+        file_put_contents('/tmp/migrations_clickhouse/imported.sql', 'SELECT 1;');
+
+        $migrationsRepository = $this->app->getMigrationsRepository();
+        $actual = $migrationsRepository->processMigrationsClickHouse('/tmp/migrations_clickhouse/');
+
+        $this->assertSame(['Processing clickhouse/imported.sql'], [...$actual]);
+    }
+
+    public function testProcessMigrationsClickHouseAllDone(): void
+    {
+        $migrationsRepository = $this->app->getMigrationsRepository();
+        $migrationsRepository->importClickHouse('/tmp/clickhouse.sql');
+
+        copy('/tmp/clickhouse.sql', '/tmp/migrations_clickhouse/clickhouse.sql');
+
+        $actual = $migrationsRepository->processMigrationsClickHouse('/tmp/migrations_clickhouse/');
+
+        $this->assertSame([], [...$actual]);
     }
 
     public function testImportMySql(): void

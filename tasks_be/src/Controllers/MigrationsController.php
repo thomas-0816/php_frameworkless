@@ -13,15 +13,7 @@ class MigrationsController
      */
     public function updateDatabaseMySql(string $path): iterable
     {
-        $migrationsRepository = $this->app->getMigrationsRepository();
-
-        foreach (scandir($path) ?: [] as $file) {
-            if (str_ends_with($file, '.sql') && !$migrationsRepository->isMySqlImported($file)) {
-                yield 'Processing mysql/' . $file;
-
-                $migrationsRepository->importMySql($path . $file);
-            }
-        }
+        return $this->app->getMigrationsRepository()->processMigrationsMySql($path);
     }
 
     /**
@@ -29,14 +21,6 @@ class MigrationsController
      */
     public function updateDatabaseClickHouse(string $path): iterable
     {
-        $migrationsRepository = $this->app->getMigrationsRepository();
-
-        foreach (scandir($path) ?: [] as $file) {
-            if (str_ends_with($file, '.sql') && !$migrationsRepository->isClickHouseImported($file)) {
-                yield 'Processing clickhouse/' . $file;
-
-                $migrationsRepository->importClickHouse($path . $file);
-            }
-        }
+        return $this->app->getMigrationsRepository()->processMigrationsClickHouse($path);
     }
 }

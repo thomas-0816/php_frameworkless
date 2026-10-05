@@ -21,30 +21,25 @@ final class MigrationsControllerTest extends TestCase
 
     public function testUpdateDatabaseMySql(): void
     {
-        $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
-            ->method('isMySqlImported')
-            ->with($this->isString())
-            ->willReturn(false);
-
-        $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
-            ->method('importMySql')
-            ->with($this->isString());
+        $this->appMock->getMigrationsRepository()->expects($this->once())
+            ->method('processMigrationsMySql')
+            ->with(__DIR__ . '/../../../src/Migrations/mysql/')
+            ->willReturn((static function (): iterable {
+                yield 'Processing mysql/2020-05-21_2000_add_migration_table.sql';
+            })());
 
         $migrationsController = new MigrationsController($this->appMock);
         $actual = $migrationsController->updateDatabaseMySql(__DIR__ . '/../../../src/Migrations/mysql/');
 
-        $this->assertContains('Processing mysql/2020-05-21_2000_add_migration_table.sql', [...$actual]);
+        $this->assertSame(['Processing mysql/2020-05-21_2000_add_migration_table.sql'], [...$actual]);
     }
 
     public function testUpdateDatabaseMySqlAllDone(): void
     {
-        $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
-            ->method('isMySqlImported')
-            ->with($this->isString())
-            ->willReturn(true);
-
-        $this->appMock->getMigrationsRepository()->expects($this->never())
-            ->method('importMySql');
+        $this->appMock->getMigrationsRepository()->expects($this->once())
+            ->method('processMigrationsMySql')
+            ->with(__DIR__ . '/../../../src/Migrations/mysql/')
+            ->willReturn([]);
 
         $migrationsController = new MigrationsController($this->appMock);
         $actual = $migrationsController->updateDatabaseMySql(__DIR__ . '/../../../src/Migrations/mysql/');
@@ -54,30 +49,25 @@ final class MigrationsControllerTest extends TestCase
 
     public function testUpdateDatabaseClickHouse(): void
     {
-        $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
-            ->method('isClickHouseImported')
-            ->with($this->isString())
-            ->willReturn(false);
-
-        $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
-            ->method('importClickHouse')
-            ->with($this->isString());
+        $this->appMock->getMigrationsRepository()->expects($this->once())
+            ->method('processMigrationsClickHouse')
+            ->with(__DIR__ . '/../../../src/Migrations/clickhouse/')
+            ->willReturn((static function (): iterable {
+                yield 'Processing clickhouse/2020-05-21_2000_add_migration_table.sql';
+            })());
 
         $migrationsController = new MigrationsController($this->appMock);
         $actual = $migrationsController->updateDatabaseClickHouse(__DIR__ . '/../../../src/Migrations/clickhouse/');
 
-        $this->assertContains('Processing clickhouse/2020-05-21_2000_add_migration_table.sql', [...$actual]);
+        $this->assertSame(['Processing clickhouse/2020-05-21_2000_add_migration_table.sql'], [...$actual]);
     }
 
     public function testUpdateDatabaseClickHouseAllDone(): void
     {
-        $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
-            ->method('isClickHouseImported')
-            ->with($this->isString())
-            ->willReturn(true);
-
-        $this->appMock->getMigrationsRepository()->expects($this->never())
-            ->method('importClickHouse');
+        $this->appMock->getMigrationsRepository()->expects($this->once())
+            ->method('processMigrationsClickHouse')
+            ->with(__DIR__ . '/../../../src/Migrations/clickhouse/')
+            ->willReturn([]);
 
         $migrationsController = new MigrationsController($this->appMock);
         $actual = $migrationsController->updateDatabaseClickHouse(__DIR__ . '/../../../src/Migrations/clickhouse/');
