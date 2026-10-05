@@ -86,7 +86,7 @@ PHP Frameworkless Micro Service Example
     PHPUnit maximum duration per test: 50ms
     PHPUnit slow query log: 10ms
 
-#### [Pipelines, CI](https://github.com/thbley/php_frameworkless/actions/workflows/build.yml) (Github Actions)
+#### [Pipelines, CI](https://github.com/thomas-0816/php_frameworkless/blob/master/.github/workflows/build.yml) (Github Actions)
 
     runs on every push or on demand
     build containers
@@ -104,7 +104,7 @@ PHP Frameworkless Micro Service Example
     collect statistics
     run pipeline locally: .github/workflows/php_local.sh
 
-#### [Dependency updates](https://github.com/thbley/php_frameworkless/actions/workflows/dependencies.yml) (Github Actions)
+#### [Dependency updates](https://github.com/thomas-0816/php_frameworkless/blob/master/.github/workflows/dependencies.yml) (Github Actions)
 
     runs daily or on demand
     creates a pull request for composer and npm library updates

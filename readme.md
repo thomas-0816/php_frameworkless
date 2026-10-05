@@ -109,6 +109,6 @@ The frontend is written as an SPA in Typed JavaScript using ES Modules and Alpin
     docker compose -f docker-compose-tasks-be.yml run --rm cli generate_token.php \
         42 foo.bar@example.com
 
-#### [architecture.md](https://github.com/thbley/php_frameworkless/blob/master/architecture.md)
+#### [architecture.md](https://github.com/thomas-0816/php_frameworkless/blob/master/architecture.md)
 
-#### [development.md](https://github.com/thbley/php_frameworkless/blob/master/development.md)
+#### [development.md](https://github.com/thomas-0816/php_frameworkless/blob/master/development.md)
