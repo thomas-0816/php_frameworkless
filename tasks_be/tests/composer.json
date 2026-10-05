@@ -32,14 +32,14 @@
         "ext-zend-opcache": "*",
         "justinrainbow/json-schema": "^5",
         "php-cs-fixer/shim": "^3",
-        "phpstan/phpstan": "^1",
-        "rector/rector": "^1",
-        "phpmd/phpmd": "^2",
-        "vimeo/psalm": "^5",
-        "phpunit/phpunit": "^10",
+        "phpstan/phpstan": "^2",
+        "rector/rector": "^2",
+        "phpmd/phpmd": "^3",
+        "vimeo/psalm": "^6",
+        "phpunit/phpunit": "^11",
         "ergebnis/phpunit-slow-test-detector": "^2",
-        "phpstan/phpstan-deprecation-rules": "^1",
-        "phpstan/phpstan-phpunit": "^1"
+        "phpstan/phpstan-deprecation-rules": "^2",
+        "phpstan/phpstan-phpunit": "^2"
     },
     "replace": {
         "symfony/polyfill-mbstring": "*",
