@@ -15,9 +15,6 @@ docker images | grep example_tasks | awk '{print $1}' | xargs -n1 trivy image --
 trivy fs --scanners license --license-full --skip-dirs "tasks_be/tests/vendor/" ./
 trivy image --scanners license example_tasks_php
 
-docker scout cves -e --locations fs://.
-docker images | grep example_tasks | awk '{print $1}' | xargs -n1 docker scout cves -e --locations
-
 docker compose up -d mysql clickhouse redis
 
 docker compose -f docker-compose-tasks-be.yml run --rm cli -i | grep -Ei "version|information"

@@ -90,7 +90,7 @@ PHP Frameworkless Micro Service Example
 
     runs on every push or on demand
     build containers
-    check containers for vulnerabilities with trivy, docker scout
+    check containers for vulnerabilities with trivy
     show php and composer library versions
     download composer packages
     check composer.lock for outdated packages and vulnerabilities

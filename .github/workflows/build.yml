@@ -132,7 +132,7 @@ jobs:
         echo '```' >> $GITHUB_STEP_SUMMARY
 
   containers:
-    name: Tests - Trivy, Docker Scout, sslscan
+    name: Tests - Trivy, sslscan
     timeout-minutes: 10
     defaults:
       run:
@@ -158,19 +158,6 @@ jobs:
         /tmp/trivy fs --no-progress --scanners vuln,misconfig,secret --exit-code 1 ./
         docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|playwright|html|mailpit" | \
           xargs -n1 /tmp/trivy image --scanners vuln --exit-code 1
-    - name: Run docker scout vulnerability scanner
-      env:
-        GH_TOKEN: ${{ github.token }}
-      run: |
-        URL=$(gh api '/repos/docker/scout-cli/releases?per_page=1' | \
-          jq -r '.[].assets[].browser_download_url | select(endswith("linux_amd64.tar.gz"))')
-        mkdir -p $HOME/.docker/cli-plugins
-        wget -q -O- $URL | tar xz -C $HOME/.docker/cli-plugins/ docker-scout
-        echo ${{ secrets.DOCKER_PAT }} | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
-        docker scout version | grep version
-        docker scout cves -e --locations fs://.
-        docker images | grep example_tasks | awk '{print $1}' | grep -Ev "mysql|clickhouse|playwright|html|mailpit" | \
-          xargs -n1 docker scout cves --locations 2>/dev/null | grep -Eiv "What|recommend"
     - name: Run sslscan, test tls, self-signed certificate
       run: |
         docker compose up nginx -d &

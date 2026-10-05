@@ -68,9 +68,6 @@ The frontend is written as an SPA in Typed JavaScript using ES Modules and Alpin
     docker images | grep example_tasks | awk '{print $1}' | xargs -n1 trivy image --scanners vuln
     trivy fs --scanners vuln,misconfig,secret --skip-dirs "tasks_be/tests/vendor/" ./
 
-    docker images | grep example_tasks | awk '{print $1}' | xargs -n1 docker scout cves --locations
-    docker scout cves fs://.
-
 #### Convert API blueprint to OpenAPI-JSON, OpenAPI-PHP and HTML
 
     chmod 0666 tasks_be/docs/api_openapi.json tasks_be/tests/data/api_openapi.php tasks_be/docs/api.html.gz
