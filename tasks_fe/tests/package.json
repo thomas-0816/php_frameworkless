@@ -10,8 +10,8 @@
         "@axe-core/playwright": "^4",
         "@biomejs/biome": "^2",
         "@playwright/test": "^1",
-        "@types/node": "^20",
-        "@vitest/coverage-v8": "^1",
+        "@types/node": "^22",
+        "@vitest/coverage-v8": "^5",
         "esbuild": "^0",
         "html-minifier-terser": "^7",
         "html-validate": "*",
@@ -19,7 +19,7 @@
         "lighthouse": "^13",
         "stylelint-config-standard": "*",
         "typescript": "^7",
-        "vitest": "*"
+        "vitest": "^5"
     },
     "allowScripts": {
         "@biomejs/biome": true,
