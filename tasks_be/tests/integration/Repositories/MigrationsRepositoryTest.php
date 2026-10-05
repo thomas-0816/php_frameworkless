@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TaskService\Tests\Integration\Repositories;
 
 use Exception;
+use Override;
 use PDO;
 use PHPUnit\Framework\TestCase;
 use TaskService\Framework\App;
@@ -14,7 +15,7 @@ final class MigrationsRepositoryTest extends TestCase
 {
     private App $app;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -23,7 +24,7 @@ final class MigrationsRepositoryTest extends TestCase
         file_put_contents('/tmp/clickhouse.sql', "INSERT INTO migration VALUES ('foo.sql', now());");
     }
 
-    #[\Override]
+    #[Override]
     protected function tearDown(): void
     {
         $database = $this->app->getDatabase();

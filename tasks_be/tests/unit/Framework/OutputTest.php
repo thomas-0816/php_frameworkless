@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace TaskService\Tests\Unit\Framework;
 
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Framework\Output;
 use TaskService\Framework\OutputMocks;
 
 final class OutputTest extends TestCase
 {
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         OutputMocks::$header = [];

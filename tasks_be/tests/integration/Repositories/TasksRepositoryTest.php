@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TaskService\Tests\Integration\Repositories;
 
+use Override;
 use PDO;
 use PHPUnit\Framework\TestCase;
 use TaskService\Framework\App;
@@ -21,7 +22,7 @@ final class TasksRepositoryTest extends TestCase
 
     private Task $task;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -34,7 +35,7 @@ final class TasksRepositoryTest extends TestCase
         $this->task = new Task(0, 'test', '2020-05-22', false, 'foo@invalid.local');
     }
 
-    #[\Override]
+    #[Override]
     protected function tearDown(): void
     {
         $this->app->getDatabase()->rollBack();

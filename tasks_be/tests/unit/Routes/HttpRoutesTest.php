@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TaskService\Tests\Unit\Routes;
 
 use Exception;
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Exceptions\HttpException;
 use TaskService\Models\Customer;
@@ -17,7 +18,7 @@ final class HttpRoutesTest extends TestCase
 {
     private Customer $customer;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->customer = new Customer(42, '');

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TaskService\Tests\Unit\Controllers;
 
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Controllers\MigrationsController;
 use TaskService\Tests\Unit\Framework\AppMock;
@@ -12,7 +13,7 @@ final class MigrationsControllerTest extends TestCase
 {
     private AppMock $appMock;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);
@@ -22,12 +23,12 @@ final class MigrationsControllerTest extends TestCase
     {
         $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
             ->method('isMySqlImported')
-            ->with($this->isType('string'))
+            ->with($this->isString())
             ->willReturn(false);
 
         $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
             ->method('importMySql')
-            ->with($this->isType('string'));
+            ->with($this->isString());
 
         $migrationsController = new MigrationsController($this->appMock);
         $actual = $migrationsController->updateDatabaseMySql(__DIR__ . '/../../../src/Migrations/mysql/');
@@ -39,7 +40,7 @@ final class MigrationsControllerTest extends TestCase
     {
         $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
             ->method('isMySqlImported')
-            ->with($this->isType('string'))
+            ->with($this->isString())
             ->willReturn(true);
 
         $this->appMock->getMigrationsRepository()->expects($this->never())
@@ -55,12 +56,12 @@ final class MigrationsControllerTest extends TestCase
     {
         $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
             ->method('isClickHouseImported')
-            ->with($this->isType('string'))
+            ->with($this->isString())
             ->willReturn(false);
 
         $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
             ->method('importClickHouse')
-            ->with($this->isType('string'));
+            ->with($this->isString());
 
         $migrationsController = new MigrationsController($this->appMock);
         $actual = $migrationsController->updateDatabaseClickHouse(__DIR__ . '/../../../src/Migrations/clickhouse/');
@@ -72,7 +73,7 @@ final class MigrationsControllerTest extends TestCase
     {
         $this->appMock->getMigrationsRepository()->expects($this->atLeastOnce())
             ->method('isClickHouseImported')
-            ->with($this->isType('string'))
+            ->with($this->isString())
             ->willReturn(true);
 
         $this->appMock->getMigrationsRepository()->expects($this->never())

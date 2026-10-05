@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TaskService\Tests\Unit\Controllers;
 
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Controllers\TasksController;
 use TaskService\Exceptions\HttpException;
@@ -18,7 +19,7 @@ final class TasksControllerTest extends TestCase
 
     private Customer $customer;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

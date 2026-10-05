@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TaskService\Tests\Unit\Services;
 
 use Exception;
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Models\Task;
 use TaskService\Services\RedisService;
@@ -14,7 +15,7 @@ final class RedisServiceTest extends TestCase
 {
     private AppMock $appMock;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

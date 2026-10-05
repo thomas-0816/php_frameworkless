@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TaskService\Tests\Unit\Services;
 
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Models\Email;
 use TaskService\Models\Task;
@@ -15,7 +16,7 @@ final class TaskProcessingServiceTest extends TestCase
 {
     private AppMock $appMock;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->appMock = new AppMock($this->createMock(...), [], []);

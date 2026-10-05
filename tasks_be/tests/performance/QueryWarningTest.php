@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TaskService\Tests\Performance;
 
 use Ergebnis\PHPUnit\SlowTestDetector\Attribute\MaximumDuration;
+use Override;
 use PDO;
 use PHPUnit\Framework\TestCase;
 use TaskService\Framework\App;
@@ -18,7 +19,7 @@ final class QueryWarningTest extends TestCase
     private string $testDatabase;
 
     /** @SuppressWarnings(PHPMD.Superglobals) */
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -32,7 +33,7 @@ final class QueryWarningTest extends TestCase
         $database->query('USE ' . $this->testDatabase);
     }
 
-    #[\Override]
+    #[Override]
     protected function tearDown(): void
     {
         $this->app->getDatabase()->query('DROP DATABASE ' . $this->testDatabase);

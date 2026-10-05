@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TaskService\Tests\Integration\Services;
 
 use Exception;
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Framework\App;
 use TaskService\Models\Task;
@@ -14,7 +15,7 @@ final class RedisServiceTest extends TestCase
 {
     private App $app;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');

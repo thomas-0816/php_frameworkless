@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TaskService\Tests\Integration\Repositories;
 
 use Ergebnis\PHPUnit\SlowTestDetector\Attribute\MaximumDuration;
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Framework\App;
 
@@ -12,7 +13,7 @@ final class CustomersRepositoryTest extends TestCase
 {
     private App $app;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $this->app = new App([], [], [], '');
@@ -20,7 +21,7 @@ final class CustomersRepositoryTest extends TestCase
         $this->app->getDatabase()->beginTransaction();
     }
 
-    #[\Override]
+    #[Override]
     protected function tearDown(): void
     {
         $this->app->getDatabase()->rollBack();

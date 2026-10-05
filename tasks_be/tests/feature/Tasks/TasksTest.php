@@ -7,6 +7,7 @@ namespace TaskService\Tests\Feature\Tasks;
 use Ergebnis\PHPUnit\SlowTestDetector\Attribute\MaximumDuration;
 use Exception;
 use JsonSchema\Validator;
+use Override;
 use PHPUnit\Framework\TestCase;
 use TaskService\Config\Config;
 use TaskService\Framework\App;
@@ -18,7 +19,7 @@ final class TasksTest extends TestCase
 {
     private string $authorization;
 
-    #[\Override]
+    #[Override]
     protected function setUp(): void
     {
         $config = new Config();
