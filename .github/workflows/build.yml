@@ -64,8 +64,8 @@ jobs:
     - name: Wait for mysql database to be ready
       run: |
         until docker compose exec -T mysql mysql -uroot -proot -e "select now()"; do echo "waiting..."; sleep 1; done
-        until docker compose exec -T mysql mysql -hclickhouse -uroot -proot -e "show database mysql_tasks"; do \
-          echo "waiting..."; sleep 1; done
+        until docker compose exec -T mysql mariadb --skip-ssl -hclickhouse -uroot -proot -e "show database mysql_tasks"; do \
+          echo "waiting ..."; sleep 1; done
       timeout-minutes: 1
 
     - name: Run update datebase
@@ -199,7 +199,7 @@ jobs:
         docker compose -f docker-compose-tasks-fe.yml run -u $(id -u) --rm npm_tests
     - name: Wait for mysql database to be ready
       run: |
-        until docker compose exec -T mysql mysql --skip-ssl -uroot -proot -e "select now()"; do echo "waiting..."; sleep 1; done
+        until docker compose exec -T mysql mysql -uroot -proot -e "select now()"; do echo "waiting..."; sleep 1; done
         until docker compose exec -T mysql mariadb --skip-ssl -hclickhouse -uroot -proot -e "show database mysql_tasks"; do \
           echo "waiting ..."; sleep 1; done
       timeout-minutes: 1
