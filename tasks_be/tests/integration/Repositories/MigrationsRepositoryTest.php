@@ -26,6 +26,7 @@ final class MigrationsRepositoryTest extends TestCase
         if (!is_dir('/tmp/migrations')) {
             mkdir('/tmp/migrations');
         }
+
         if (!is_dir('/tmp/migrations_clickhouse')) {
             mkdir('/tmp/migrations_clickhouse');
         }
