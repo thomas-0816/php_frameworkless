@@ -64,8 +64,6 @@ jobs:
     - name: Wait for mysql database to be ready
       run: |
         until docker compose exec -T mysql mysql -uroot -proot -e "select now()"; do echo "waiting..."; sleep 1; done
-        until docker compose exec -T mysql mysql --skip-ssl -hclickhouse -uroot -proot -e "show database mysql_tasks"; do \
-          echo "waiting ..."; sleep 1; done
       timeout-minutes: 1
 
     - name: Run update datebase
@@ -200,7 +198,7 @@ jobs:
     - name: Wait for mysql database to be ready
       run: |
         until docker compose exec -T mysql mysql -uroot -proot -e "select now()"; do echo "waiting..."; sleep 1; done
-        until docker compose exec -T mysql mysql --skip-ssl -hclickhouse -uroot -proot -e "show database mysql_tasks"; do \
+        until docker compose exec -T mysql mysql -hclickhouse -uroot -proot -e "show database mysql_tasks"; do \
           echo "waiting ..."; sleep 1; done
       timeout-minutes: 1
     - name: Run update datebase
