@@ -23,8 +23,12 @@ final class MigrationsRepositoryTest extends TestCase
         file_put_contents('/tmp/migration.sql', "INSERT INTO migration VALUES ('foo.sql', now());");
         file_put_contents('/tmp/clickhouse.sql', "INSERT INTO migration VALUES ('foo.sql', now());");
 
-        mkdir('/tmp/migrations');
-        mkdir('/tmp/migrations_clickhouse');
+        if (!is_dir('/tmp/migrations')) {
+            mkdir('/tmp/migrations');
+        }
+        if (!is_dir('/tmp/migrations_clickhouse')) {
+            mkdir('/tmp/migrations_clickhouse');
+        }
     }
 
     #[Override]
@@ -54,7 +58,7 @@ final class MigrationsRepositoryTest extends TestCase
 
     public function testProcessMigrationsMySql(): void
     {
-        file_put_contents('/tmp/migrations/imported.sql', 'SELECT 1;');
+        file_put_contents('/tmp/migrations/imported.sql', 'DO 1;');
 
         $migrationsRepository = $this->app->getMigrationsRepository();
         $actual = $migrationsRepository->processMigrationsMySql('/tmp/migrations/');
@@ -76,7 +80,7 @@ final class MigrationsRepositoryTest extends TestCase
 
     public function testProcessMigrationsClickHouse(): void
     {
-        file_put_contents('/tmp/migrations_clickhouse/imported.sql', 'SELECT 1;');
+        file_put_contents('/tmp/migrations_clickhouse/imported.sql', 'DO 1;');
 
         $migrationsRepository = $this->app->getMigrationsRepository();
         $actual = $migrationsRepository->processMigrationsClickHouse('/tmp/migrations_clickhouse/');
