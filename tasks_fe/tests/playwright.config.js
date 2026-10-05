@@ -1,7 +1,6 @@
 // @ts-check
 
 import { defineConfig, devices } from '@playwright/test';
-import os from 'node:os';
 
 // see https://playwright.dev/docs/test-configuration
 export default defineConfig({
@@ -9,7 +8,7 @@ export default defineConfig({
     fullyParallel: false,
     forbidOnly: true,
     retries: 0,
-    workers: os.cpus().length,
+    workers: 4,
     reporter: 'list',
     outputDir: '/tmp/playwright-results',
     timeout: 10000,

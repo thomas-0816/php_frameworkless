@@ -10,6 +10,7 @@ test.use({ bypassCSP: true }); // required by Axebuilder
 test('pass accessibility scans', async ({ page }) => {
     await page.goto('/tasks/');
     await expect(page.getByText('Login')).toBeVisible();
+    await page.waitForFunction(() => document.getAnimations().every((animation) => animation.playState === 'finished'));
 
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations).toEqual([]);
@@ -18,6 +19,7 @@ test('pass accessibility scans', async ({ page }) => {
     await page.getByLabel('Password').fill('insecure');
     await page.getByText('Login').click();
     await expect(page.getByText('12345')).toBeVisible();
+    await page.waitForFunction(() => document.getAnimations().every((animation) => animation.playState === 'finished'));
 
     const results2 = await new AxeBuilder({ page }).analyze();
     expect(results2.violations).toEqual([]);
