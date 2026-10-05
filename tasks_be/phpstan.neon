@@ -6,7 +6,6 @@ parameters:
   level: max
   paths:
     - src/
-    - tests/
   excludePaths:
     - src/vendor/
     - tests/vendor/

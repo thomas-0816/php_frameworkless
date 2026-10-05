@@ -187,7 +187,6 @@ final class TasksTest extends TestCase
         /** @var float $time */
         $time = curl_getinfo($curlHandle, CURLINFO_TOTAL_TIME);
         $error = curl_error($curlHandle);
-        curl_close($curlHandle);
 
         $this->assertSame('', $error);
         $this->assertSame($status, $responseCode, json_encode([$response, $responseCode, $time, $error], 0) ?: '');

@@ -1,14 +1,15 @@
 <?php
 
+use Rector\CodeQuality\Rector\Attribute\ExplicitAttributeNamedArgsRector;
+use Rector\CodeQuality\Rector\CallLike\AddNameToBooleanArgumentRector;
+use Rector\CodeQuality\Rector\CallLike\AddNameToNullArgumentRector;
 use Rector\CodeQuality\Rector\Expression\InlineIfToExplicitIfRector;
 use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
-use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\Naming\Rector\Assign\RenameVariableToMatchMethodCallReturnTypeRector;
 use Rector\Php74\Rector\Property\RestoreDefaultNullToNullableTypePropertyRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
-use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
-use Rector\Strict\Rector\Ternary\DisallowedShortTernaryRuleFixerRector;
+use Rector\TypeDeclaration\Rector\StmtsAwareInterface\SafeDeclareStrictTypesRector;
 use Rector\ValueObject\PhpVersion;
 
 return RectorConfig::configure()
@@ -17,18 +18,19 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withPhpSets(php85: true)
-    ->withPhpVersion(PhpVersion::PHP_83)
+    ->withPhpVersion(PhpVersion::PHP_85)
     ->withAttributesSets(phpunit: true)
     ->withRootFiles()
     ->withSkip([
-        DisallowedShortTernaryRuleFixerRector::class,
+        SafeDeclareStrictTypesRector::class,
+        AddNameToNullArgumentRector::class,
+        AddNameToBooleanArgumentRector::class,
+        ExplicitAttributeNamedArgsRector::class,
         FlipTypeControlToUseExclusiveTypeRector::class,
         InlineIfToExplicitIfRector::class,
-        PostIncDecToPreIncDecRector::class,
         ReadOnlyPropertyRector::class,
         RenameVariableToMatchMethodCallReturnTypeRector::class,
         RestoreDefaultNullToNullableTypePropertyRector::class,
-        AddOverrideAttributeToOverriddenMethodsRector::class,
         __DIR__ . '/src/vendor',
         __DIR__ . '/tests/vendor',
         __DIR__ . '/tests/data',

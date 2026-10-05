@@ -25,7 +25,6 @@ final class EmailTest extends TestCase
         ]);
         $response = (string) curl_exec($curlHandle);
         $this->assertSame('', curl_error($curlHandle));
-        curl_close($curlHandle);
 
         /**
          * @var ?array{ messages:array{ID:string}[] } $data
@@ -43,7 +42,6 @@ final class EmailTest extends TestCase
         ]);
         $response = (string) curl_exec($curlHandle);
         $this->assertSame('', curl_error($curlHandle));
-        curl_close($curlHandle);
 
         /**
          * @var ?array{ Subject:string, Text:string, From:array{Address:string}, To:array{Address:string}[] } $data

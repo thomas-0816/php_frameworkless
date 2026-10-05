@@ -17,7 +17,7 @@ final class AuthenticationTest extends TestCase
     {
         $config = new Config();
 
-        $privateKey = openssl_pkey_get_private($config->privateKey, null);
+        $privateKey = openssl_pkey_get_private($config->privateKey);
         $this->assertInstanceOf(OpenSSLAsymmetricKey::class, $privateKey);
 
         $publicKey = openssl_pkey_get_public($config->publicKey);

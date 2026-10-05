@@ -24,7 +24,7 @@ class RedisService
          *
          * @var string|false $result
          */
-        $result = $redis->xAdd($stream, '*', ['data' => json_encode($task, JSON_FORCE_OBJECT)]);
+        $result = $redis->xadd($stream, '*', ['data' => json_encode($task, JSON_FORCE_OBJECT)]);
         if ($result === false) {
             throw new Exception('redis error: ' . ($redis->getLastError() ?? ''));
         }
@@ -48,12 +48,12 @@ class RedisService
 
         $redis = $this->app->getRedis();
 
-        $result = $redis->xAck($stream, $group, $messages);
+        $result = $redis->xack($stream, $group, $messages);
         if ($result === false) {
             throw new Exception('redis error: ' . ($redis->getLastError() ?? ''));
         }
 
-        $result = $redis->xDel($stream, $messages);
+        $result = $redis->xdel($stream, $messages);
         if ($result === false) {
             throw new Exception('redis error: ' . ($redis->getLastError() ?? ''));
         }
@@ -71,18 +71,18 @@ class RedisService
     {
         $redis = $this->app->getRedis();
 
-        $redis->xGroup('CREATE', $stream, $group, '0', true);
+        $redis->xgroup('CREATE', $stream, $group, '0', true);
 
         // 0 = pending messages
         /** @var array{data:string}[][]|false */
-        $pendingMessages = $redis->xReadGroup($group, $consumer, [$stream => 0], $count);
+        $pendingMessages = $redis->xreadgroup($group, $consumer, [$stream => 0], $count);
         if ($pendingMessages === false) {
             throw new Exception('redis error: ' . ($redis->getLastError() ?? ''));
         }
 
         // > = new messages
         /** @var array{data:string}[][]|false */
-        $newMessages = $redis->xReadGroup($group, $consumer, [$stream => '>'], $count);
+        $newMessages = $redis->xreadgroup($group, $consumer, [$stream => '>'], $count);
         if ($newMessages === false) {
             throw new Exception('redis error: ' . ($redis->getLastError() ?? ''));
         }
@@ -115,7 +115,7 @@ class RedisService
         $redis = $this->app->getRedis();
 
         /** @var array{string, string, int, int}[]|false $pendings */
-        $pendings = $redis->xPending($stream, $group, '-', '+', $count, $consumer);
+        $pendings = $redis->xpending($stream, $group, '-', '+', $count, $consumer);
         if ($pendings === false) {
             throw new Exception('redis error: ' . ($redis->getLastError() ?? ''));
         }

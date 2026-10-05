@@ -8,7 +8,6 @@
         "alwaysStrict": true,
         "moduleResolution": "bundler",
         "allowJs": true,
-        "downlevelIteration": false,
         "maxNodeModuleJsDepth": 1,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
