@@ -8,7 +8,7 @@ export default defineConfig({
     fullyParallel: false,
     forbidOnly: true,
     retries: 0,
-    workers: 4,
+    workers: 2,
     reporter: 'list',
     outputDir: '/tmp/playwright-results',
     timeout: 10000,
