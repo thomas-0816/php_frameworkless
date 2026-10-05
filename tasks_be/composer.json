@@ -1,10 +1,11 @@
 {
-    "name": "thomasbley/example_tasks_php",
+    "name": "thomasbley/php_frameworkless",
     "description": "PHP Tasks REST API",
     "license": "MIT",
+    "version": "1.0.0",
     "config": {
         "platform": {
-            "php": "8.1"
+            "php": "8.2"
         },
         "vendor-dir": "src/vendor",
         "optimize-autoloader" : true,
@@ -14,7 +15,7 @@
         "cache-read-only": true
     },
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "ext-mbstring": "*",
         "ext-curl": "*",
         "ext-openssl": "*",
