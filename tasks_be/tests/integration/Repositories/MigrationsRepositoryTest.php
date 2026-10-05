@@ -80,7 +80,7 @@ final class MigrationsRepositoryTest extends TestCase
 
     public function testProcessMigrationsClickHouse(): void
     {
-        file_put_contents('/tmp/migrations_clickhouse/imported.sql', 'DO 1;');
+        file_put_contents('/tmp/migrations_clickhouse/imported.sql', 'SELECT 1;');
 
         $migrationsRepository = $this->app->getMigrationsRepository();
         $actual = $migrationsRepository->processMigrationsClickHouse('/tmp/migrations_clickhouse/');
