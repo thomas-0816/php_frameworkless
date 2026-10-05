@@ -55,6 +55,7 @@ class Authentication
         }
 
         /** @var string $signature */
+
         return 'Bearer ' . $data . '.' . $this->urlBase64Encode($signature);
     }
 

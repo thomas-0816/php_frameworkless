@@ -73,7 +73,7 @@ class App
 
     public function getDatabase(): PDO
     {
-        if (!isset($this->database)) {
+        if ($this->database === null) {
             $config = $this->getConfig();
 
             $dsn = sprintf(
@@ -88,7 +88,7 @@ class App
 
     public function getClickHouse(): PDO
     {
-        if (!isset($this->clickhouse)) {
+        if ($this->clickhouse === null) {
             $config = $this->getConfig();
 
             $dsn = sprintf(
@@ -105,7 +105,7 @@ class App
 
     public function getRedis(): Redis
     {
-        if (!isset($this->redis)) {
+        if ($this->redis === null) {
             $config = $this->getConfig();
 
             $redis = new Redis();
