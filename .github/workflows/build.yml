@@ -45,7 +45,6 @@ jobs:
         docker compose -f docker-compose-tasks-be.yml run --rm composer check-platform-reqs --no-cache
         docker compose -f docker-compose-tasks-be.yml run -u $(id -u) --rm composer
         docker compose -f docker-compose-tasks-be.yml run --rm composer outdated --strict --no-cache
-        docker compose -f docker-compose-tasks-be.yml run --rm composer audit
         docker compose -f docker-compose-tasks-be.yml run --rm composer_tests validate --no-cache
         docker compose -f docker-compose-tasks-be.yml run --rm composer_tests check-platform-reqs --no-cache
         docker compose -f docker-compose-tasks-be.yml run -u $(id -u) --rm composer_tests

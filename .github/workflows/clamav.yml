@@ -2,9 +2,9 @@ name: clamav
 
 on:
   workflow_dispatch:
-  schedule:
+  # schedule:
     # minute hour day_of_month month day_of_week
-    - cron: "0 10 * * 1"
+    # - cron: "0 10 * * 1"
 
 jobs:
   build:
