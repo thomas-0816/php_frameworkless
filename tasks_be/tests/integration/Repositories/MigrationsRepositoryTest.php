@@ -112,7 +112,7 @@ final class MigrationsRepositoryTest extends TestCase
         $this->assertFalse($migrationsRepository->isClickHouseImported('unknown.sql'));
     }
 
-    public function testIsClickHouseImportedNoMigrationSchema(): void
+    public function testIsClickHouseImportedNoMigration(): void
     {
         $clickhouse = $this->app->getClickHouse();
         $clickhouse->exec('CREATE DATABASE if not exists test');

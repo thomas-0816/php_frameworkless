@@ -17,7 +17,7 @@
         "html-validate": "*",
         "jsdom": "^30",
         "lighthouse": "^13",
-        "stylelint-config-standard": "^40.0.0",
+        "stylelint-config-standard": "^41.0.0",
         "typescript": "^7",
         "vitest": "^5"
     },

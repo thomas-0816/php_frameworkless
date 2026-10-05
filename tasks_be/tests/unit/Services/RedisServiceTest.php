@@ -36,7 +36,7 @@ final class RedisServiceTest extends TestCase
         $redisService->addTaskToStream('test', new Task(42, 'test', '2020-01-02', false, ''));
     }
 
-    public function testRemoveMessagesFromStreamXackException(): void
+    public function testRemoveMessagesXackException(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('redis error: remove');
@@ -77,7 +77,7 @@ final class RedisServiceTest extends TestCase
         $redisService->removeMessagesFromStream('test', 'group', ['1234']);
     }
 
-    public function testGetPendingMessagesFromStreamException(): void
+    public function testGetPendingMessagesException(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('redis error: get_pending');
