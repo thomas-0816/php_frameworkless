@@ -115,13 +115,9 @@ class TasksController
         $processed = [];
         foreach ($tasksRepository->getTasksFromQueue() as $task) {
             $tasksRepository->updateTaskQueue($task->id);
-
             $taskProcessingService->processTaskUpdate($task);
-
             $redisService->addTaskToStream($stream, $task);
-
             $tasksRepository->deleteTaskQueue($task->id);
-
             $processed[] = $task->id;
         }
 
@@ -147,17 +143,14 @@ class TasksController
         $messageIds = array_keys($tasks);
 
         $retries = $redisService->getRetriesFromStream($stream, $group, $consumer, 100);
-
         foreach ($retries as $messageId => $count) {
             if ($count > 10) {
                 error_log('retried too often: ' . json_encode([$messageId => $count], 0));
-
                 unset($tasks[$messageId]);
             }
         }
 
         $this->app->getTasksRepository()->importTasksToClickHouse($tasks);
-
         $redisService->removeMessagesFromStream($stream, $group, $messageIds);
 
         return $messageIds;
