@@ -41,7 +41,7 @@ final class TemplateServiceTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('missing template');
 
-        $view = new class() implements View {
+        $view = new class implements View {
             public const TEMPLATE = '';
         };
 
@@ -54,7 +54,7 @@ final class TemplateServiceTest extends TestCase
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('missing template file');
 
-        $view = new class() implements View {
+        $view = new class implements View {
             public const TEMPLATE = 'invalid';
         };
 

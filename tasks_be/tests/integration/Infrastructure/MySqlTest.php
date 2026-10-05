@@ -28,8 +28,8 @@ final class MySqlTest extends TestCase
             'character_set_results' => 'utf8mb4',
             'collation_connection' => 'utf8mb4_general_ci',
             'sql_require_primary_key' => 'ON',
-            'sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,' .
-                'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
+            'sql_mode' => 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,'
+                . 'ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION',
         ];
         $variables += $subset;
 
