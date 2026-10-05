@@ -14,6 +14,3 @@ EXPOSE 3306 33060
 HEALTHCHECK none
 
 CMD ["mariadbd"]
-
-[client]
-skip-ssl = true
